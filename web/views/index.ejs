@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <script>
+        const listener = (event) => {
+            let data, type;
+            try {
+                const item = JSON.parse(event.data);
+                data = item.data;
+                type = item.type;
+            } catch (_) {
+                const item = event.data;
+                data = item.data;
+                type = item.type;
+            }
+            switch (type) {
+                case "MOVE":
+                    const li = document.createElement("li");
+                    li.innerText = data;
+                    const target = document.getElementById('content');
+                    target.appendChild(li);
+            }
+        };
+        // Android
+        document.addEventListener('message', listener);
+        // IOS
+        window.addEventListener('message', listener);
+    </script>
+</head>
+
+<body>
+    <h1>Welcome <%= title %></h1>
+    <ul id="content"></ul>
+    <div>
+        <button>홈 이동</button>
+    </div>
+</body>
+
+</html>
