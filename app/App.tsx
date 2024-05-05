@@ -1,8 +1,8 @@
+import { useCallback, useRef } from "react";
 import { WebView } from "react-native-webview";
+import { StatusBar, Platform } from "react-native";
 import { Button, StyleSheet, View } from "react-native";
 import { getStatusBarHeight } from "react-native-status-bar-height";
-import { StatusBar, Platform } from "react-native";
-import { useCallback, useRef } from "react";
 
 const StatusBarHeight =
   Platform.OS === "ios" ? getStatusBarHeight(true) : StatusBar.currentHeight;
@@ -18,6 +18,11 @@ export default function App() {
     webViewRef.current.postMessage(item);
   }, [webViewRef]);
 
+  const hanlderMessage = useCallback((e) => {
+    const data = JSON.parse(e.nativeEvent.data);
+    console.log(data);
+  }, []);
+
   return (
     <View style={styles.bgContainer}>
       <WebView
@@ -25,8 +30,9 @@ export default function App() {
         style={styles.container}
         originWhitelist={["*"]}
         source={{
-          uri: "https://7131-61-76-249-87.ngrok-free.app",
+          uri: "http://192.168.1.176:3000",
         }}
+        onMessage={hanlderMessage}
       />
       <View style={styles.btn}>
         <Button
