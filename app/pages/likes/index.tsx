@@ -1,17 +1,16 @@
-import { useRef } from "react";
-import { WebView } from "react-native-webview";
-import styles from "./styles";
+import { createStackNavigator } from "@react-navigation/stack";
+import LikesView from "components/likes";
+
+const Stack = createStackNavigator();
 
 export default function LikesPage() {
-  const webViewRef = useRef<WebView>(null);
   return (
-    <WebView
-      ref={webViewRef}
-      style={styles.container}
-      originWhitelist={["*"]}
-      source={{
-        uri: "http://192.168.1.176:3000/likes",
+    <Stack.Navigator
+      screenOptions={{
+        headerShown: false,
       }}
-    />
+    >
+      <Stack.Screen name="Likes" component={LikesView} />
+    </Stack.Navigator>
   );
 }

@@ -1,67 +1,68 @@
-import { useCallback, useRef } from "react";
-import { WebView } from "react-native-webview";
-import { StatusBar, Platform } from "react-native";
-import { Button, StyleSheet, View } from "react-native";
-import { getStatusBarHeight } from "react-native-status-bar-height";
+import "react-native-gesture-handler";
+import { NavigationContainer } from "@react-navigation/native";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import Ionicons from "react-native-vector-icons/Ionicons";
+import { HomePage, LikesPage, SettingPage, SearchPage } from "pages";
 
-const StatusBarHeight =
-  Platform.OS === "ios" ? getStatusBarHeight(true) : StatusBar.currentHeight;
+const Tab = createBottomTabNavigator();
 
-export default function App() {
-  const webViewRef = useRef<WebView>(null);
-
-  const sendMsg = useCallback(() => {
-    const item = JSON.stringify({
-      type: "MOVE",
-      data: "업데이트 하세요",
-    });
-    webViewRef.current.postMessage(item);
-  }, [webViewRef]);
-
-  const hanlderMessage = useCallback((e) => {
-    const data = JSON.parse(e.nativeEvent.data);
-    console.log(data);
-  }, []);
-
+function App() {
   return (
-    <View style={styles.bgContainer}>
-      <WebView
-        ref={webViewRef}
-        style={styles.container}
-        originWhitelist={["*"]}
-        source={{
-          uri: "http://192.168.1.176:3000",
-        }}
-        onMessage={hanlderMessage}
-      />
-      <View style={styles.btn}>
-        <Button
-          title="테스트"
-          onPress={() => {
-            sendMsg();
+    <NavigationContainer>
+      <Tab.Navigator
+        initialRouteName="Home"
+        screenOptions={({ route }) => ({
+          tabBarIcon: ({ focused, color, size }) => {
+            let iconName;
+            if (route.name === "Home") {
+              iconName = focused ? "home" : "home-outline";
+            } else if (route.name === "Search") {
+              iconName = focused ? "search" : "search-outline";
+            } else if (route.name === "Likes") {
+              iconName = focused ? "heart-sharp" : "heart-outline";
+            } else if (route.name === "Settings") {
+              iconName = focused ? "settings" : "settings-outline";
+            }
+
+            return <Ionicons name={iconName} size={size} color={color} />;
+          },
+          headerShown: false,
+          tabBarShowLabel: false,
+          tabBarActiveTintColor: "#1D232F",
+          tabBarInactiveTintColor: "#898DA4",
+        })}
+      >
+        <Tab.Screen
+          name="Home"
+          component={HomePage}
+          options={{
+            title: "메인",
           }}
         />
-      </View>
-    </View>
+        <Tab.Screen
+          name="Search"
+          component={SearchPage}
+          options={{
+            title: "검색",
+          }}
+        />
+        <Tab.Screen
+          name="Likes"
+          component={LikesPage}
+          options={{
+            title: "좋아요",
+          }}
+        />
+        <Tab.Screen
+          name="Settings"
+          component={SettingPage}
+          options={{
+            title: "프로필",
+          }}
+        />
+      </Tab.Navigator>
+    </NavigationContainer>
   );
 }
 
-const styles = StyleSheet.create({
-  bgContainer: {
-    flex: 1,
-    marginTop: StatusBarHeight,
-    backgroundColor: "#1d232f",
-  },
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  btn: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
+export default App;

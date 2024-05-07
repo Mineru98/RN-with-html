@@ -1,17 +1,16 @@
-import { useRef } from "react";
-import { WebView } from "react-native-webview";
-import styles from "./styles";
+import { createStackNavigator } from "@react-navigation/stack";
+import SettingView from "components/setting";
+
+const Stack = createStackNavigator();
 
 export default function SettingPage() {
-  const webViewRef = useRef<WebView>(null);
   return (
-    <WebView
-      ref={webViewRef}
-      style={styles.container}
-      originWhitelist={["*"]}
-      source={{
-        uri: "http://192.168.1.176:3000/setting",
+    <Stack.Navigator
+      screenOptions={{
+        headerShown: false,
       }}
-    />
+    >
+      <Stack.Screen name="Setting" component={SettingView} />
+    </Stack.Navigator>
   );
 }

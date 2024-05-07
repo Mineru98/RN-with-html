@@ -3,12 +3,12 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
     <title><%= title %></title>
     <script>
         function move(page) {
             const item = JSON.stringify({
-                "type": "MOVE",
+                "type": "URL",
                 "data": page
             })
             window.ReactNativeWebView.postMessage(item);
@@ -44,10 +44,10 @@
     <h1>Welcome <%= title %></h1>
     <ul id="content"></ul>
     <div>
-        <button onclick="move('home')">홈</button>
-        <button onclick="move('search')">검색</button>
-        <button onclick="move('likes')">좋아요</button>
-        <button onclick="move('setting')">설정</button>
+        <button onclick="move('Home')">홈</button>
+        <button onclick="move('Search')">검색</button>
+        <button onclick="move('Likes')">좋아요</button>
+        <button onclick="move('Settings')">설정</button>
     </div>
 </body>
 

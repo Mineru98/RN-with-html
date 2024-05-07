@@ -1,17 +1,18 @@
-import { useRef } from "react";
-import { WebView } from "react-native-webview";
-import styles from "./styles";
+import { createStackNavigator } from "@react-navigation/stack";
+import HomeView from "components/home";
+import DetailView from "components/detail";
+
+const Stack = createStackNavigator();
 
 export default function HomePage() {
-  const webViewRef = useRef<WebView>(null);
   return (
-    <WebView
-      ref={webViewRef}
-      style={styles.container}
-      originWhitelist={["*"]}
-      source={{
-        uri: "http://192.168.1.176:3000/",
+    <Stack.Navigator
+      screenOptions={{
+        headerShown: false,
       }}
-    />
+    >
+      <Stack.Screen name="Home" component={HomeView} />
+      <Stack.Screen name="DetailBokji" component={DetailView} />
+    </Stack.Navigator>
   );
 }

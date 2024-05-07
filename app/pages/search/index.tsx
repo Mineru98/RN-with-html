@@ -1,17 +1,16 @@
-import { useRef } from "react";
-import { WebView } from "react-native-webview";
-import styles from "./styles";
+import { createStackNavigator } from "@react-navigation/stack";
+import SearchView from "components/search";
+
+const Stack = createStackNavigator();
 
 export default function SearchPage() {
-  const webViewRef = useRef<WebView>(null);
   return (
-    <WebView
-      ref={webViewRef}
-      style={styles.container}
-      originWhitelist={["*"]}
-      source={{
-        uri: "http://192.168.1.176:3000/search",
+    <Stack.Navigator
+      screenOptions={{
+        headerShown: false,
       }}
-    />
+    >
+      <Stack.Screen name="Search" component={SearchView} />
+    </Stack.Navigator>
   );
 }
