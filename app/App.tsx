@@ -2,7 +2,7 @@ import "react-native-gesture-handler";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import { HomePage, LikesPage, SettingPage, SearchPage } from "pages";
+import { HomeScreen, LikesScreen, SettingScreen, SearchScreen } from "screen";
 
 const Tab = createBottomTabNavigator();
 
@@ -10,7 +10,7 @@ function App() {
   return (
     <NavigationContainer>
       <Tab.Navigator
-        initialRouteName="Home"
+        initialRouteName="HomeScreen"
         screenOptions={({ route }) => ({
           tabBarIcon: ({ focused, color, size }) => {
             let iconName;
@@ -33,29 +33,29 @@ function App() {
         })}
       >
         <Tab.Screen
-          name="Home"
-          component={HomePage}
+          name="HomeScreen"
+          component={HomeScreen}
           options={{
             title: "메인",
           }}
         />
         <Tab.Screen
-          name="Search"
-          component={SearchPage}
+          name="SearchScreen"
+          component={SearchScreen}
           options={{
             title: "검색",
           }}
         />
         <Tab.Screen
-          name="Likes"
-          component={LikesPage}
+          name="LikesScreen"
+          component={LikesScreen}
           options={{
             title: "좋아요",
           }}
         />
         <Tab.Screen
-          name="Settings"
-          component={SettingPage}
+          name="SettingsScreen"
+          component={SettingScreen}
           options={{
             title: "프로필",
           }}

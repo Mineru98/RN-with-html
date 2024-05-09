@@ -6,9 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
     <title><%= title %></title>
     <script>
-        function move(page) {
+        function urlmove() {
             const item = JSON.stringify({
                 "type": "URL",
+                "data": "https://bokji24.notion.site/46d0ddb7c25d40b7b1f83f86451fec84"
+            })
+            window.ReactNativeWebView.postMessage(item);
+        }
+
+        function move(page) {
+            const item = JSON.stringify({
+                "type": "MOVE",
                 "data": page
             })
             window.ReactNativeWebView.postMessage(item);
@@ -44,10 +52,13 @@
     <h1>Welcome <%= title %></h1>
     <ul id="content"></ul>
     <div>
-        <button onclick="move('Home')">홈</button>
-        <button onclick="move('Search')">검색</button>
-        <button onclick="move('Likes')">좋아요</button>
-        <button onclick="move('Settings')">설정</button>
+        <button onclick="move('HomeScreen')">홈</button>
+        <button onclick="move('SearchScreen')">검색</button>
+        <button onclick="move('LikesScreen')">좋아요</button>
+        <button onclick="move('SettingsScreen')">설정</button>
+    </div>
+    <div>
+        <div id="link" onclick="urlmove()">링크 이동</div>
     </div>
 </body>
 

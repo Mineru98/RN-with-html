@@ -1,9 +1,10 @@
-import { useCallback, useRef } from "react";
+import { memo, useCallback, useRef } from "react";
 import { View } from "react-native";
+import IsEqual from "react-fast-compare";
 import { WebView } from "react-native-webview";
 import styles from "./styles";
 
-export default function SearchView({ navigation }) {
+function SearchView({ navigation }) {
   const webViewRef = useRef<WebView>(null);
 
   const sendMsg = useCallback(() => {
@@ -28,10 +29,13 @@ export default function SearchView({ navigation }) {
         style={styles.container}
         originWhitelist={["*"]}
         source={{
-          uri: "http://172.30.1.9:3000/search",
+          // uri: "http://172.30.1.9:3000/search",
+          uri: "http://172.17.47.231:3000/search",
         }}
         onMessage={hanlderMessage}
       />
     </View>
   );
 }
+
+export default memo(SearchView, IsEqual);

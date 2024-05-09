@@ -8,7 +8,7 @@
     <script>
         function move(page) {
             const item = JSON.stringify({
-                "type": "URL",
+                "type": "MOVE",
                 "data": page
             })
             window.ReactNativeWebView.postMessage(item);
@@ -44,10 +44,10 @@
     <h1>Welcome <%= title %></h1>
     <ul id="content"></ul>
     <div>
-        <button onclick="move('Home')">홈</button>
-        <button onclick="move('Search')">검색</button>
-        <button onclick="move('Likes')">좋아요</button>
-        <button onclick="move('Settings')">설정</button>
+        <button onclick="move('HomeScreen')">홈</button>
+        <button onclick="move('SearchScreen')">검색</button>
+        <button onclick="move('LikesScreen')">좋아요</button>
+        <button onclick="move('SettingsScreen')">설정</button>
     </div>
 </body>
 

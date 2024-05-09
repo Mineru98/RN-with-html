@@ -16,11 +16,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-  contentContainer: {
-    flex: 1,
-    alignItems: "center",
-    backgroundColor: "gray",
-  },
 });
 
 export default styles;
