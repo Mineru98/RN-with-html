@@ -1,9 +1,6 @@
 import { memo } from "react";
 import isEqual from "react-fast-compare";
-import {
-  TransitionPresets,
-  createStackNavigator,
-} from "@react-navigation/stack";
+import { createStackNavigator } from "@react-navigation/stack";
 import HomeView from "components/home";
 import DetailView from "components/detail";
 import ExternalLinkView from "components/externalLink";
